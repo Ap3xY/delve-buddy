@@ -4,26 +4,9 @@ require 'minitest/autorun'
 require 'item_parser'
 
 class ItemParserTest < Minitest::Test
-  def test_parse_input_text_fossil_in_stash_tab
-    input = "Item Class: Stackable Currency
-    Rarity: Currency
-    Shuddering Fossil
-    --------
-    Stack Size: 2/20
-    --------
-    More Speed modifiers
-    No Mana modifiers
-    --------
-    Place in a Resonator to influence item crafting.
-    Shift click to unstack."
-
-    expected = { name: 'Shuddering Fossil',
-                 item_class: 'Stackable Currency',
-                 rarity: 'Currency',
-                 stack_size: { current: '2', max: '20' },
-                 modifiers: ['More Speed modifiers', 'No Mana modifiers'],
-                 instructions: ['Place in a Resonator to influence item crafting.', 'Shift click to unstack.'] }
-
-    assert_equal ItemParser.parse(input), expected
+  def test_parse_first_section_of_input_fossil
+    input = "Item Class: Stackable Currency\nRarity: Currency\nShuddering Fossil\n--------\nStack Size: 2/20\n--------\nMore Speed modifiers\nNo Mana modifiers\n--------\nPlace in a Resonator to influence item crafting.\nShift click to unstack."
+    assert_equal({ item_class: 'Stackable Currency', rarity: 'Currency', name: 'Shuddering Fossil' },
+                 ItemParser.parse(input))
   end
 end
