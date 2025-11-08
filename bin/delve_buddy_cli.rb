@@ -1,11 +1,22 @@
 require_relative '../lib/delve_buddy'
 require_relative '../lib/price_fetcher'
 
-fetcher = PriceFetcher.new
+puts 'Welcome to Delve Buddy!'
+puts "Copy & paste an item (ctrl + c, ctrl + v) and hit Enter. Or type 'exit' or 'quit'."
 
-delve_buddy = DelveBuddy.new(price_fetcher: fetcher)
+loop do
+  print '> '
+  input = gets.chomp
+  break if %w[exit quit].include?(input.downcase)
 
-print 'Enter Item: '
-item = gets.chomp
+  puts "Please enter an item (or type 'exit')."
 
-delve_buddy.check_price(item)
+  if input.strip.empty?
+    puts "Please enter an item ID (or type 'exit')."
+    next
+  end
+
+  DelveBuddy.new(price_fetcher: PriceFetcher.new).check_price(input)
+end
+
+puts 'Goodbye!'
