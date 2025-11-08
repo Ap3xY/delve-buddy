@@ -1,5 +1,6 @@
 require_relative '../lib/delve_buddy'
 require_relative '../lib/price_fetcher'
+require_relative '../lib/item_parser'
 
 puts 'Welcome to Delve Buddy!'
 puts "Copy & paste an item (ctrl + c, ctrl + v) and hit Enter. Or type 'exit' or 'quit'."
@@ -16,7 +17,8 @@ loop do
     next
   end
 
-  DelveBuddy.new(price_fetcher: PriceFetcher.new).check_price(input)
+  item_data = ItemParser.parse(input)
+  DelveBuddy.new(price_fetcher: PriceFetcher.new).check_price(item_data)
 end
 
 puts 'Goodbye!'

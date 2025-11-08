@@ -5,9 +5,9 @@ class DelveBuddy
     @price_fetcher = price_fetcher
   end
 
-  def check_price(item)
-    price = @price_fetcher.fetch(item)
+  def check_price(item_data)
+    price = @price_fetcher.fetch(item_data)
 
-    puts "The Price for #{item} is #{price}"
+    puts "The Price for #{item_data[:name]} is #{price}"
   end
 end
