@@ -1,9 +1,13 @@
-task default: %w[test]
+require 'rake/testtask'
 
+Rake::TestTask.new do |t|
+  t.libs << 'lib'
+  t.pattern = 'test/**/*_test.rb'
+end
+
+desc 'Run the CLI tool'
 task :run do
-  ruby 'lib/delve_buddy.rb'
+  ruby 'bin/delve_buddy_cli.rb'
 end
 
-task :test do
-  ruby 'test/delve_buddy_test.rb'
-end
+task default: :test

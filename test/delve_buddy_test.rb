@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require_relative '../lib/delve_buddy'
+require 'delve_buddy'
 
 class FakeFetcher
   def fetch(_item)
