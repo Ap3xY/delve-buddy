@@ -1,9 +1,7 @@
 class DelveBuddy
-  attr_reader :coolness
+  def initialize; end
 
-  def initialize
-    @coolness = 11
+  def check_price
+    6
   end
 end
-
-puts "Coolness: #{DelveBuddy.new.coolness}/10"
