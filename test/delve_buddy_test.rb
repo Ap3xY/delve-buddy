@@ -3,8 +3,14 @@
 require 'minitest/autorun'
 require_relative '../lib/delve_buddy'
 
+class FakeFetcher
+  def fetch(_item)
+    6
+  end
+end
+
 class DelveBuddyTest < Minitest::Test
   def test_check_price_returns_price
-    assert_equal DelveBuddy.new.check_price, 6
+    assert_output(/6/) { DelveBuddy.new(price_fetcher: FakeFetcher.new).check_price('Tabula Rasa') }
   end
 end
